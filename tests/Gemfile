@@ -1,0 +1,14 @@
+source "https://rubygems.org"
+group :development do
+  gem 'test-kitchen'
+  gem "vagrant"
+  gem 'net-ssh'
+#  gem 'rbnacl'
+#  gem 'rbnacl-libsodium' #, if your system doesn't have libsodium installed.
+#  gem 'bcrypt_pbkdf' # (>= 1.0, < 2.0)
+  gem 'serverspec'
+  gem "vagrant-cachier"
+  gem 'kitchen-vagrant'
+  gem 'kitchen-ansiblepush'
+  gem 'kitchen-verifier-serverspec'
+end

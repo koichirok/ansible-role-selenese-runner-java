@@ -1,0 +1,4 @@
+---
+# vars file for FreeBSD
+selenese_runner_java_jar_dir_default: /usr/local/share/java/classes
+selenese_runner_java_bin_dir_default: /usr/local/bin

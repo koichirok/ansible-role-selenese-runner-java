@@ -1,0 +1,7 @@
+---
+# vars file for selenese-runner-java
+
+selenese_runner_java_jar_url:
+  'https://github.com/vmi/selenese-runner-java/releases/download/selenese-runner-java-{{ selenese_runner_java_version }}/selenese-runner.jar'
+selenese_runner_java_jar_checksums:
+  '3.9.0': 'sha256:1c472c97adc13151d430f47bef152c2cf3dc31f13e7f19059bb54442b0c35101'

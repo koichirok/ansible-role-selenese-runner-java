@@ -1,0 +1,5 @@
+tests/vendor
+tests/.bundle
+tests/.kitchen
+tests/.vagrant
+tests/playbooks/roles

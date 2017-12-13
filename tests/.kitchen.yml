@@ -1,0 +1,51 @@
+---
+driver:
+  name: vagrant
+  provision: true
+  vagrantfiles:
+  - vagrantfiles/common.rb
+
+provisioner:
+  name: ansible_push
+  playbook: playbooks/test.yml
+  #verbose: 'vvvv'
+  ansible_config: ansible.cfg
+  chef_bootstrap_url: false
+  idempotency_test: true
+  fail_non_idempotent: true
+  use_instance_name: true
+  diff: true
+
+platforms:
+- name: centos-7
+  driver:
+    box: centos/7
+    vagrantfiles:
+    - vagrantfiles/common.rb
+    - vagrantfiles/linux.rb
+  verifier:
+    patterns:
+    - "serverspec/linux_spec.rb"
+- name: freebsd-11
+  driver:
+    box: generic/freebsd11
+    vagrantfiles:
+    - vagrantfiles/common.rb
+    - vagrantfiles/freebsd.rb
+  provisioner:
+    extra_vars:
+      ansible_python_interpreter: '/usr/local/bin/python2.7'
+  verifier:
+    patterns:
+    - "serverspec/freebsd_spec.rb"
+
+verifier:
+  name: serverspec
+  remote_exec: false
+
+suites:
+- name: default
+  driver:
+    cachier: true
+  run_list:
+  attributes:

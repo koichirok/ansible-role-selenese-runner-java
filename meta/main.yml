@@ -1,0 +1,16 @@
+galaxy_info:
+  author: KIKUCHI Koichiro
+  description: Ansible role to install selenese-runner-java
+  license: BSD
+  min_ansible_version: 2.0
+  platforms:
+  - name: FreeBSD
+    versions:
+    - all
+  - name: GenericLinux
+    versions:
+    - all
+  galaxy_tags:
+  - selenium
+
+dependencies: []

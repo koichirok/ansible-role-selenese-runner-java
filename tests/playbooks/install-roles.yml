@@ -1,0 +1,8 @@
+---
+- hosts: all
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Install dependent roles
+      local_action:
+        command ansible-galaxy install trombik.java --roles-path roles
