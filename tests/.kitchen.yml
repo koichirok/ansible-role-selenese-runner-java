@@ -9,6 +9,8 @@ provisioner:
   name: ansible_push
   playbook: playbooks/test.yml
   #verbose: 'vvvv'
+  extra_vars: &EXTRA_VARS_DEFAULT
+    selenese_runner_java_version: <%= ENV['SELENESE_RUNNER_VERSION'] || "3.9.0" %>
   ansible_config: ansible.cfg
   chef_bootstrap_url: false
   idempotency_test: true
@@ -35,6 +37,7 @@ platforms:
     - vagrantfiles/freebsd.rb
   provisioner:
     extra_vars:
+      << : *EXTRA_VARS_DEFAULT
       ansible_python_interpreter: '/usr/local/bin/python2.7'
   verifier:
     patterns:

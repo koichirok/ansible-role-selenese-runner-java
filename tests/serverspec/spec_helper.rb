@@ -6,6 +6,9 @@ require 'pathname'
 require 'net/ssh'
 
 RSpec.configure do |config|
+  config.before(:all) do
+    @selenese_runner_version = ENV['SELENESE_RUNNER_VERSION'] || '3.9.0'
+  end
   set :host, ENV['KITCHEN_HOSTNAME']
   # ssh options at http://net-ssh.github.io/net-ssh/Net/SSH.html#method-c-start
   # ssh via ssh key (only)
