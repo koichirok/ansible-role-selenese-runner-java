@@ -9,7 +9,3 @@ describe file('/usr/local/bin/selenese-runner') do
   it { should be_file }
   it { should be_mode 555 }
 end
-
-describe command('selenese-runner --help') do
-  its(:stdout) { should match /^Selenese Runner \d+\.\d+\.\d+/ }
-end

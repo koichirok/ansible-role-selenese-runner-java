@@ -26,6 +26,7 @@ platforms:
   verifier:
     patterns:
     - "serverspec/linux_spec.rb"
+    - "serverspec/selenese-runner_spec.rb"
 - name: freebsd-11
   driver:
     box: generic/freebsd11
@@ -38,6 +39,7 @@ platforms:
   verifier:
     patterns:
     - "serverspec/freebsd_spec.rb"
+    - "serverspec/selenese-runner_spec.rb"
 
 verifier:
   name: serverspec
