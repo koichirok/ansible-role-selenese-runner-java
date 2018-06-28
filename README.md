@@ -22,7 +22,7 @@ Role Variables
 
 Variable | Description | Default
 ---------|-------------|--------
-`selenese_runner_java_version`| The version of the selenese-runner-java to install | 3.9.0
+`selenese_runner_java_version`| The version of the selenese-runner-java to install | 3.16.0
 `selenese_runner_java_jar_dir`| The directory for installing selenese-runner.jar | `selenese_runner_java_jar_dir_default` defined in the YAML file for each platform under the [vars](vars/) directory.
 `selenese_runner_java_bin_dir`| The directory for installing selenese-runner script | `selenese_runner_java_bin_dir_default` defined in the YAML file for each platform under the [vars](vars/) directory.
 `selenese_runner_java_file_owner`| The user name or id of owner of the jar and script to install | `ansible_user_uid`

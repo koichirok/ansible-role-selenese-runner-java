@@ -4,6 +4,9 @@
 selenese_runner_java_jar_url:
   'https://github.com/vmi/selenese-runner-java/releases/download/selenese-runner-java-{{ selenese_runner_java_version }}/selenese-runner.jar'
 selenese_runner_java_jar_checksums:
+  '3.16.0': 'sha256:fc329f784be79a400c4941809a30c7cbe097e4a117a7eab31b02d7f55ae5e567'
+  '3.15.0': 'sha256:cc5c3e98a6199fd832b7d0217baaea745dbc75bdc3516dc61de15a075b0d6005'
+  '3.14.0': 'sha256:89be7ad3d1e278cd4cacbf0fb3f50fb169d0a142533e0b97fc50d88bf59ae1b3'
   '3.13.0': 'sha256:7ba6e2dd8898cebf308c3458a189344ddded7e7e8a74bcc49fec7c122c4c959c'
   '3.12.0': 'sha256:ac3edcd64ddeb42c8abe4616f49395a146fcbd3c955d57678e9f11bfddfa81da'
   '3.11.0': 'sha256:4a2dab9cbee60753eefc5d79e8b12de56e4935b24e7123f23bf5ee3cce163cdf'
@@ -18,7 +21,7 @@ selenese_runner_java_jar_checksums:
   '3.2.0': 'sha256:37cdb99be54af70f44f11e29c86839426d280c3c75b57fb833a4718c37cbd655'
   '3.1.0': 'sha256:a597835cab15ad8f7aab2cbfab2f75b62537471726f5ef3cdc0eb61c861279d5'
   '3.0.1': 'sha256:2c6fc55ed725b1985c200fd3032d029afaecf1cfde96b77264ee7c9e8ed24c73'
-  #'3.0.0': 'sha256:2c6fc55ed725b1985c200fd3032d029afaecf1cfde96b77264ee7c9e8ed24c73'
+  '3.0.0': 'sha256:2c6fc55ed725b1985c200fd3032d029afaecf1cfde96b77264ee7c9e8ed24c73'
   '2.13.0': 'sha256:ac54bd8fd3b9a1d28c822cb5512192eb0f7974c1e37b0eb94a679905caa79bf7'
   '2.12.0': 'sha256:01169cc239a4e58c627be40d56d34065481728abea7c7721a228ac4241b7a77d'
   '2.11.0': 'sha256:35ab4b8ad25ae55a28a2ba4ca65de5a1ea949f8ffc5118a895c799dcbbb4f8d7'
