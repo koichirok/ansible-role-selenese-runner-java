@@ -1,0 +1,104 @@
+# update-role.yml --- playbook to update this role
+#
+# This is not a playbook for testing purpose. This playbook does:
+# - add missing selenese-runner-java's version and checksums to
+#   role's variables
+# - update default version of selenese_runner_java_version to latest
+# - update default value of selenese_runner_java_version in README.md
+---
+- hosts: localhost
+  connection: local
+  vars:
+    vars_file: ../../vars/main.yml
+    defaults_file: ../../defaults/main.yml
+    download_tmpdir: '{{ "%s/.."|format(playbook_dir) }}'
+  tasks:
+    - name: load "selenese_runner_java_jar_checksums" variable
+      include_vars: '{{ vars_file }}'
+
+    - name: Get selenese-runner-java releases from github
+      uri:
+        url: https://api.github.com/repos/vmi/selenese-runner-java/releases 
+      register:
+        releases
+      check_mode: no
+
+    - name: Get versions not listed in "selenese_runner_java_jar_checksums"
+      set_fact:
+        missing_versions: '{{ all_versions|difference(listed_versions) }}'
+        all_versions: '{{ all_versions }}'
+        listed_versions: '{{ listed_versions }}'
+      vars:
+        all_versions: '{{ releases.json | json_query("[].tag_name") | map("regex_replace", "selenese-runner-java-", "") | list }}'
+        listed_versions: '{{ selenese_runner_java_jar_checksums | json_query("keys(@)") }}'
+
+    - name: Download jars
+      get_url:
+        url: '{{ releases.json | json_query(query) }}'
+        dest: '{{ "%s/%s.jar" | format(download_tmpdir,item) }}'
+      vars:
+        query: '{{ "[?tag_name == `%s`].assets[]|[?name == `selenese-runner.jar`].browser_download_url|[0]"| format(item) }}'
+      loop: '{{ missing_versions | map("regex_replace","^","selenese-runner-java-") | list }}'
+      register: download_jars
+
+    - name: Get checksum for downloaded files
+      stat:
+        path: '{{ item.dest }}'
+        checksum_algorithm: sha256
+      loop: '{{ download_jars.results }}'
+      loop_control:
+        label: '{{ item.item }}'
+      register:
+        makesum_jars
+
+    - name: Update role's "selenese_runner_java_jar_checksums" variable
+      lineinfile:
+        path: '{{ vars_file }}'
+        line: "{{ line_tmpl | format(version, csum_algo, item.stat.checksum) }}"
+        insertbefore: '{{ insertbefore }}'
+        firstmatch: yes
+      vars:
+        line_tmpl: "  '%s': '%s:%s'"
+        csum_algo: "{{ item.invocation.module_args.checksum_algorithm }}"
+        version: '{{ item.item.item | regex_replace("selenese-runner-java-","") }}'
+        insertbefore: "{{ all_versions | select('version', version, '<') | map('regex_escape') | map('regex_replace', '(.*)', \"^  '\\1': *'.*:[0-9a-fA-F]*'\") | join('|') }}"
+      loop: '{{ makesum_jars.results }}'
+      loop_control:
+        label: '{{ item.item.item }}'
+
+    - name: load default "selenese_runner_java_version" variable
+      include_vars: '{{ defaults_file }}'
+
+    - set_fact:
+        available_versions: '{{ download_jars.results|json_query("[].item")|map("regex_replace","selenese-runner-java-","")|list + listed_versions }}'
+
+    - name: Get latest version
+      set_fact:
+        latest_version:  '{{ latest_versions }}'
+      loop: '{{ available_versions }}'
+      vars:
+        newer_vers: '{{ available_versions | select("version", item, ">=") | list }}'
+        latest_versions: '{{ latest_version|default(available_versions)|intersect(newer_vers) }}'
+      when: 'latest_version|default([])|length != 1'
+
+    - name: Update role's selenese_runner_java_version default variable to latest
+      lineinfile:
+        path: '{{ defaults_file }}'
+        line: "{{ \"selenese_runner_java_version: '%s'\"|format(latest_version[0]) }}"
+        regexp: '^selenese_runner_java_version: '
+
+    - name: Update README.md
+      lineinfile:
+        path: ../../README.md
+        line: '{{ "`selenese_runner_java_version`|\1| %s" | format(latest_version[0]) }}'
+        regexp: '^`selenese_runner_java_version`\|(.*)\| \d+\.\d+\.\d+'
+        backrefs: yes
+        firstmatch: yes
+
+    - name: Remove downloaded files
+      file:
+        path: '{{ item.dest }}'
+        state: absent
+      loop: '{{ download_jars.results }}'
+      loop_control:
+        label: '{{ item.item }}'
