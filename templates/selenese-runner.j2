@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CLASSPATH='{{ selenese_runner_java_custom_jars
+CLASSPATH='{{ selenese_runner_java_extra_classpath
               | union([ "%s/selenese-runner.jar"|format(selenese_runner_java_jar_dir) ]) 
               | join(":") }}'
 {% if ansible_os_family == "FreeBSD" %}
