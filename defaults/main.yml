@@ -1,7 +1,7 @@
 ---
 # defaults file for selenese-runner-java
 
-selenese_runner_java_version: '3.19.2'
+selenese_runner_java_version: '3.20.0'
 selenese_runner_java_jar_dir: '{{ selenese_runner_java_jar_dir_default }}'
 selenese_runner_java_bin_dir: '{{ selenese_runner_java_bin_dir_default }}'
 selenese_runner_java_extra_classpath: []
