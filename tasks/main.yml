@@ -1,7 +1,7 @@
 ---
 # tasks file for selenese-runner-java
 
-- name: Load platform default variables 
+- name: Load platform default variables
   include_vars: "{{ item }}"
   with_first_found:
     - "{{ ansible_os_family }}.yml"
@@ -23,7 +23,7 @@
     mode: '0444'
     owner: '{{ selenese_runner_java_file_owner | default(ansible_user_uid) }}'
     group: '{{ selenese_runner_java_file_group | default(ansible_user_gid) }}'
- 
+
 - name: Install `selenese-runner' script
   template:
     src: selenese-runner.j2
