@@ -1,5 +1,8 @@
-tests/vendor
-tests/.bundle
-tests/.kitchen
-tests/.vagrant
+# TestKitchen related
+vendor
+.bundle
+.kitchen
+.vagrant
 tests/playbooks/roles
+# pyenv
+.python-version
