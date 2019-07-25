@@ -4,6 +4,11 @@
 selenese_runner_java_jar_url:
   'https://github.com/vmi/selenese-runner-java/releases/download/selenese-runner-java-{{ selenese_runner_java_version }}/selenese-runner.jar'
 selenese_runner_java_jar_checksums:
+  '3.24.1': 'sha256:5e3d913b49c70cd5a475f4d289e105fdbcae6a6499270090dc88d73687b3a6ea'
+  '3.24.0': 'sha256:31c1cf24af40e3cffb7a373acee80607737db916bb38edbd2605c945dba1aa8f'
+  '3.23.0': 'sha256:8c3fc9e6852b47252abf2865789ebee0addae9cfb8b94a6d993570863718075a'
+  '3.22.0': 'sha256:2f0e45b236d51ed2cf199a3f0a1c33714f70c048aa0544735f40e1e3d0d50e79'
+  '3.21.0': 'sha256:cf27a7510fb76e09d661ad0ca828f04f95e92f46b1aef3248e2ee82f74add7e9'
   '3.20.0': 'sha256:88e60a527efaf3326442ef858379744a0ed7f62c055a7e67a96d113393693164'
   '3.19.2': 'sha256:3089120bf4ce2f303e29e5aa8163043ce6d63f0a8f6a9ae61113cfdd052f1a4d'
   '3.19.0': 'sha256:dab28a1f0c421c565be964493b0584e61c21674860ca2624767104fa82a891c3'
